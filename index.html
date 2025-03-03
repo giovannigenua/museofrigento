@@ -14,5 +14,16 @@
   <button id="start-tour">Inizia il Tour</button>
 
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+  .then(function(registration) {
+    console.log('Service Worker registrato con successo:', registration);
+  })
+  .catch(function(error) {
+    console.log('Errore nel registrare il Service Worker:', error);
+  });
+}
+</script>
 </body>
 </html>
