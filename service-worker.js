@@ -1,24 +1,23 @@
-self.addEventListener('install', function(event) {
+self.addEventListener('install', (event) => {
     event.waitUntil(
-      caches.open('virtual-tour-cache').then(function(cache) {
-        return cache.addAll([
-          '/',
-          '/index.html',
-          '/style.css',
-          '/script.js',
-          '/images/logo.png',
-          '/images/icon-192x192.png',
-          '/images/icon-512x512.png',
-        ]);
-      })
+        caches.open('my-cache').then((cache) => {
+            return cache.addAll([
+                '/', // La home
+                '/index.html', // La tua pagina principale
+                '/style.css', // Eventuali file CSS
+                '/script.js', // Eventuali file JS
+                '/manifest.json', // Il manifesto
+                '/icons/icon-192x192.png', // Icona della PWA
+                '/icons/icon-512x512.png'  // Icona della PWA
+            ]);
+        })
     );
-  });
-  
-  self.addEventListener('fetch', function(event) {
+});
+
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-      caches.match(event.request).then(function(response) {
-        return response || fetch(event.request);
-      })
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
     );
-  });
-  
+});
